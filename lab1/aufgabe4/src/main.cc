@@ -45,21 +45,21 @@ char name[15];
 // Name des Spielers eingeben
 char *enterName(char str[], int len)
 {
-    cout << "Spielernamen eingeben: ";
-    if (fgets(str, len, stdin) != nullptr)
+    do
     {
-        int new_line = strlen(str) - 1;
-        if (str[new_line] == '\n')
-            str[new_line] = '\0';
-        cout << "Los geht's " << str << "!" << endl;
-        return str;
-    }
-    else
-    {
-        cerr << "Invalid input!" << endl;
-        exit(1);
-        return nullptr;
-    }
+        cout << "Name des Spielers: ";
+        if (fgets(str, len, stdin) == nullptr)
+        {
+            cerr << "Fehler im Eingabestream!" << endl;
+            exit(1);
+            return nullptr;
+        }
+    } while (strlen(str) <= 1);
+
+    int new_line = strlen(str) - 1;
+    if (str[new_line] == '\n')
+        str[new_line] = '\0';
+    return str;
 }
 
 // Den Computer zufällig wählen lassen.
@@ -126,36 +126,36 @@ objectType winningObject(objectType obj1, objectType obj2)
 {
     switch (obj1)
     {
-        case SCHERE:
-            if (obj2 == PAPIER)
-            {
-                return obj1;
-            }
-            else
-            {
-                return obj2;
-            }
-        case STEIN:
-            if (obj2 == SCHERE)
-            {
-                return obj1;
-            }
-            else
-            {
-                return obj2;
-            }
-        case PAPIER:
-            if (obj2 == STEIN)
-            {
-                return obj1;
-            }
-            else
-            {
-                return obj2;
-            }
-        case INVALID_CHOICE:
-        default:
-            return INVALID_CHOICE;
+    case SCHERE:
+        if (obj2 == PAPIER)
+        {
+            return obj1;
+        }
+        else
+        {
+            return obj2;
+        }
+    case STEIN:
+        if (obj2 == SCHERE)
+        {
+            return obj1;
+        }
+        else
+        {
+            return obj2;
+        }
+    case PAPIER:
+        if (obj2 == STEIN)
+        {
+            return obj1;
+        }
+        else
+        {
+            return obj2;
+        }
+    case INVALID_CHOICE:
+    default:
+        return INVALID_CHOICE;
     }
 }
 
@@ -165,7 +165,8 @@ void showWinner(player p1, player p2)
     if (p1.choice == p2.choice)
     {
         cout << "UNENTSCHIEDEN!" << endl;
-    } else
+    }
+    else
     {
         objectType win = winningObject(p1.choice, p2.choice);
         player &winner = p1;
