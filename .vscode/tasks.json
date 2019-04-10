@@ -4,10 +4,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "ReConfigure",
+            "label": "ReConfigure Release",
             "type": "shell",
-            "command": "rm -rf _build && mkdir _build && cd _build && cmake ../${input:component}",
-            "problemMatcher": []
+            "command": "rm -rf _build && mkdir _build && cd _build && cmake ../${input:component}"
+        },
+        {
+            "label": "ReConfigure Debug",
+            "type": "shell",
+            "command": "rm -rf _build && mkdir _build && cd _build && cmake -DCMAKE_BUILD_TYPE=Debug ../${input:component}"
         },
         {
             "label": "Build",
