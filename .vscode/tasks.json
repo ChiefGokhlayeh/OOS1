@@ -6,12 +6,14 @@
         {
             "label": "ReConfigure Release",
             "type": "shell",
-            "command": "rm -rf _build && mkdir _build && cd _build && cmake ../${input:component}"
+            "command": "rm -rf _build && mkdir _build && cd _build && cmake ../${input:component}",
+            "problemMatcher": []
         },
         {
             "label": "ReConfigure Debug",
             "type": "shell",
-            "command": "rm -rf _build && mkdir _build && cd _build && cmake -DCMAKE_BUILD_TYPE=Debug ../${input:component}"
+            "command": "rm -rf _build && mkdir _build && cd _build && cmake -DCMAKE_BUILD_TYPE=Debug ../${input:component}",
+            "problemMatcher": []
         },
         {
             "label": "Build",
