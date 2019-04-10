@@ -6,19 +6,19 @@
         {
             "label": "ReConfigure Release",
             "type": "shell",
-            "command": "rm -rf _build && mkdir _build && cd _build && cmake ../${input:component}",
+            "command": "rm -rf _build && mkdir _build && cd _build && cmake ..",
             "problemMatcher": []
         },
         {
             "label": "ReConfigure Debug",
             "type": "shell",
-            "command": "rm -rf _build && mkdir _build && cd _build && cmake -DCMAKE_BUILD_TYPE=Debug ../${input:component}",
+            "command": "rm -rf _build && mkdir _build && cd _build && cmake -DCMAKE_BUILD_TYPE=Debug ..",
             "problemMatcher": []
         },
         {
             "label": "Build",
             "type": "shell",
-            "command": "cmake --build _build",
+            "command": "cmake --build _build --target ${input:target}",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -30,11 +30,9 @@
     ],
     "inputs": [
         {
-            "id": "component",
-            "type": "pickString",
-            "options": ["ha1/aufgabe1", "ha1/aufgabe2", "ha1/aufgabe3", "ha1/aufgabe4", "ha1/aufgabe5", "lab1/aufgabe1", "lab1/aufgabe2", "lab1/aufgabe3", "lab1/aufgabe4",
-            "lab1/aufgabe5", "ha2/aufgabe1", "ha2/aufgabe2", "lab2/aufgabe1", "lab2/aufgabe2", "lab2/aufgabe3"],
-            "description": "Path to the cmake component to build relative to the project root."
+            "id": "target",
+            "type": "promptString",
+            "description": "cmake target to build (type 'all' to build all targets)"
         }
     ]
 }

@@ -5,46 +5,49 @@
 
 enum Symbols
 {
-    WALL = '#',
-    PATH = ' ',
-    COIN = ':',
-    NL = '\n',
-    EOS = '\0',
-    CURSOR = 'X',
-    GHOST = 'G'
+  WALL = '#',
+  PATH = ' ',
+  COIN = ':',
+  NL = '\n',
+  EOS = '\0',
+  CURSOR = 'X',
+  GHOST = 'G'
 };
 
 class Labyrinth
 {
-  private:
-    static constexpr int maxRowCount = 11;
-    static constexpr int maxColumnCount = 11;
-    static constexpr int maxGhostCount = 3;
+public:
+  static constexpr int maxRowCount = 11;
+  static constexpr int maxColumnCount = 11;
+  static constexpr int maxGhostCount = 3;
 
-    char labyrinth[maxRowCount][maxColumnCount + 2];
-    int ghostCount;
-    int coinCount;
-    int rowCount;
-    int columnCount;
-  public:
-    Labyrinth();
-    ~Labyrinth();
+  Labyrinth();
+  ~Labyrinth();
 
-    void Build();
-    void Clear();
-    void Print();
-    void PlaceCoins();
-    bool IsCoinAt(Position &pos);
+  void Build();
+  void Clear();
+  void Print() const;
+  void PlaceCoins();
+  bool IsCoinAt(const Position &pos) const;
 
-    int GetRowCount();
-    int GetColumnCount();
-    int GetGhostCount();
-    int GetCoinCount();
+  int GetRowCount() const;
+  int GetColumnCount() const;
+  int GetGhostCount() const;
+  int GetCoinCount() const;
 
-    char GetCharAt(Position &pos);
+  char GetCharAt(const Position &pos) const;
+  void SetCharAt(char c, const Position &pos);
+  void SetCharAt(char c, const Position &posOld, const Position &posNew);
 
-    void Export(const char* filename);
-    void Import(const char* filename);
+  void Export(const char *filename) const;
+  void Import(const char *filename);
+
+private:
+  char labyrinth[maxRowCount][maxColumnCount + 2];
+  int ghostCount;
+  int coinCount;
+  int rowCount;
+  int columnCount;
 };
 
 #endif

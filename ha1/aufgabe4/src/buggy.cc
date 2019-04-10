@@ -1,4 +1,4 @@
-// Vergleich von Deklaration, Enumeration und Typumwandlung 
+// Vergleich von Deklaration, Enumeration und Typumwandlung
 // in C und C++
 
 // Fehler                                           C++
@@ -14,10 +14,10 @@ int main(void)                               // Z7  OK
     sports mysport;                          // Z9  OK
 //    enum sports mysport;                     // Z10 redeclaration of 'sports mysport'
     mysport = FUSSBALL;                      // Z11 OK
-    mysport = FUSSBALL + 1;                  // Z12 invalid conversion from 'int' to 'sports' (gcc -fpermissive)
-    mysport = 1;                             // Z13 invalid conversion from 'int' to 'sports' (gcc -fpermissive)
-    mysport = 10;                            // Z14 invalid conversion from 'int' to 'sports' (gcc -fpermissive)
-    mysport = mysport + 1;                   // Z15 invalid conversion from 'int' to 'sports' (gcc -fpermissive)
+    //mysport = FUSSBALL + 1;                  // Z12 invalid conversion from 'int' to 'sports' (gcc -fpermissive)
+    //mysport = 1;                             // Z13 invalid conversion from 'int' to 'sports' (gcc -fpermissive)
+    //mysport = 10;                            // Z14 invalid conversion from 'int' to 'sports' (gcc -fpermissive)
+    //mysport = mysport + 1;                   // Z15 invalid conversion from 'int' to 'sports' (gcc -fpermissive)
     mysport = sports(mysport + 1);           // Z16 OK
     float f;                                 // Z17 OK
     for (i = FUSSBALL; i <= HOCKEY; i++)     // Z18 OK

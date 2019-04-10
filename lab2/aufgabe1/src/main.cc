@@ -1,3 +1,4 @@
+#include "mystring.hh"
 #include "pacman.hh"
 
 const bool build = false;

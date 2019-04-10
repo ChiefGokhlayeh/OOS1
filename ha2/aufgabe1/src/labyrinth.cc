@@ -17,12 +17,6 @@
         cout << "\033[H\033[J"; \
     } while (0)
 
-#define ARROW_UP_KEY ('W')
-#define ARROW_LEFT_KEY ('A')
-#define ARROW_RIGHT_KEY ('D')
-#define ARROW_DOWN_KEY ('S')
-#define Q_KEY ('Q')
-
 extern int min(int a, int b);
 extern int max(int a, int b);
 
@@ -85,7 +79,7 @@ void Labyrinth::Clear()
     }
 }
 
-void Labyrinth::Print()
+void Labyrinth::Print() const
 {
     clear_console();
     for (auto &row : labyrinth)
@@ -110,37 +104,48 @@ void Labyrinth::PlaceCoins()
     }
 }
 
-bool Labyrinth::IsCoinAt(Position &pos)
+bool Labyrinth::IsCoinAt(const Position &pos) const
 {
     return GetCharAt(pos) == COIN;
 }
 
-int Labyrinth::GetRowCount()
+int Labyrinth::GetRowCount() const
 {
     return rowCount;
 }
 
-int Labyrinth::GetColumnCount()
+int Labyrinth::GetColumnCount() const
 {
     return columnCount;
 }
 
-int Labyrinth::GetGhostCount()
+int Labyrinth::GetGhostCount() const
 {
     return ghostCount;
 }
 
-int Labyrinth::GetCoinCount()
+int Labyrinth::GetCoinCount() const
 {
     return coinCount;
 }
 
-char Labyrinth::GetCharAt(Position &pos)
+char Labyrinth::GetCharAt(const Position &pos) const
 {
     return labyrinth[pos.posy][pos.posx];
 }
 
-void Labyrinth::Export(const char *filename)
+void Labyrinth::SetCharAt(char c, const Position &pos)
+{
+    labyrinth[pos.posy][pos.posx] = c;
+}
+
+void Labyrinth::SetCharAt(char c, const Position &posOld, const Position &posNew)
+{
+    SetCharAt(c, posNew);
+    SetCharAt(PATH, posOld);
+}
+
+void Labyrinth::Export(const char *filename) const
 {
     ofstream ofs(filename, ofstream::trunc);
 

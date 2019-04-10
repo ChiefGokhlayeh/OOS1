@@ -33,10 +33,10 @@ struct Position
     // Der int = 0 gibt an, dass die Mauern berücksichtigt werden.
     // Wenn int != 0, dann kann auch durch Mauern gelaufen werden.
     // Dies ist für das Erstellen von Labyrinthen notwendig.
-    Position &Step(Labyrinth &, int = 0);
+    const Position &Step(const Labyrinth &, int = 0);
     // Zwei Positionen vergleichen,
     // liefert true, wenn x und y gleich
-    bool Equals(Position &);
+    bool Equals(const Position &) const;
 };
 
 #endif

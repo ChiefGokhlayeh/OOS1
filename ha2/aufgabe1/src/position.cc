@@ -24,7 +24,7 @@ Position::Position(int x, int y)
 // Der int mode = 0 gibt an, dass die Mauern berücksichtigt werden.
 // Wenn int != 0, dann kann auch durch Mauern gelaufen werden.
 // Dies ist für das Erstellen von Labyrinthen notwendig.
-Position &Position::Step(Labyrinth &lab, int mode)
+const Position &Position::Step(const Labyrinth &lab, int mode)
 {
     Position tmp = *this;
     switch (r)
@@ -53,7 +53,7 @@ Position &Position::Step(Labyrinth &lab, int mode)
 
 // Zwei Positionen vergleichen,
 // liefert true, wenn x und y gleich
-bool Position::Equals(Position &p)
+bool Position::Equals(const Position &p) const
 {
     return (posx == p.posx && posy == p.posy);
 }
