@@ -28,7 +28,7 @@
             "id": "component",
             "type": "pickString",
             "options": ["ha1/aufgabe1", "ha1/aufgabe2", "ha1/aufgabe3", "ha1/aufgabe4", "ha1/aufgabe5", "lab1/aufgabe1", "lab1/aufgabe2", "lab1/aufgabe3", "lab1/aufgabe4",
-            "lab1/aufgabe5", "ha2/aufgabe1"],
+            "lab1/aufgabe5", "ha2/aufgabe1", "ha2/aufgabe2"],
             "description": "Path to the cmake component to build relative to the project root."
         }
     ]
