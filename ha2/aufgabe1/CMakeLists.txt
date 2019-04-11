@@ -3,8 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 project(ha2_aufgabe1)
 
 add_library(lib_user_conio src/user_conio.cc)
-target_include_directories(lib_user_conio PRIVATE inc)
-target_include_directories(lib_user_conio INTERFACE inc)
+target_include_directories(lib_user_conio PUBLIC inc)
 
 add_library(lib_${PROJECT_NAME} src/labyrinth.cc src/position.cc)
 target_include_directories(lib_${PROJECT_NAME} PRIVATE inc)
