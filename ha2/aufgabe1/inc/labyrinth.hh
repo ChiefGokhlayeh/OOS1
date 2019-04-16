@@ -3,6 +3,10 @@
 
 #include "position.hh"
 
+#if defined(USE_NCURSES)
+#include <ncurses.h>
+#endif
+
 enum Symbols
 {
   WALL = '#',
@@ -34,6 +38,9 @@ public:
   int GetColumnCount() const;
   int GetGhostCount() const;
   int GetCoinCount() const;
+#if defined(USE_NCURSES)
+  WINDOW *GetWindowHandle() const;
+#endif
 
   char GetCharAt(const Position &pos) const;
   void SetCharAt(char c, const Position &pos);
@@ -48,6 +55,9 @@ private:
   int coinCount;
   int rowCount;
   int columnCount;
+#if defined(USE_NCURSES)
+  WINDOW *labWin;
+#endif
 };
 
 #endif

@@ -5,7 +5,7 @@ target_include_directories(app_${PROJECT_NAME} PRIVATE inc)
 target_link_libraries(app_${PROJECT_NAME} lib_ha2_aufgabe1)
 target_link_libraries(app_${PROJECT_NAME} lib_ha2_aufgabe2)
 
-target_compile_definitions(app_${PROJECT_NAME} PUBLIC -D USE_USER_CONIO)
+target_compile_definitions(app_${PROJECT_NAME} PUBLIC -D USE_NCURSES)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     find_package(Curses REQUIRED)

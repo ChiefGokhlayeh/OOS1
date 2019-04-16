@@ -18,6 +18,7 @@ public:
   void Step();
   // Spiel spielen
   void Play();
+  int CheckForInput();
 };
 
 #endif

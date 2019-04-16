@@ -2,6 +2,9 @@
 
 #if defined(USE_USER_CONIO)
 #include "user_conio.h"
+#elif defined(USE_NCURSES)
+#include <ncurses.h>
+#include <sstream>
 #else
 #include <conio.h>
 #endif
@@ -10,12 +13,23 @@
 #include <thread>
 #include <unistd.h>
 
+#if defined(USE_USER_CONIO)
+#elif defined(USE_NCURSES)
+#define KEY_Q ('Q')
+#else
+#define KEY_UP ('W')
+#define KEY_LEFT ('A')
+#define KEY_RIGHT ('D')
+#define KEY_DOWN ('S')
+#define KEY_Q ('Q')
+#endif
+
 using namespace std;
 using namespace std::chrono;
 
 PacMan::PacMan(Labyrinth &l, Player &sp, Player gArr[], int ghostCount)
 {
-    steps = 0; // Anzahl der Spielschritte
+    steps = 0;     // Anzahl der Spielschritte
     coinCount = 0; // Anzahl der Münzen im Labyrinth
     lab = &l;
     s = &sp;
@@ -29,6 +43,10 @@ PacMan::PacMan(Labyrinth &l, Player &sp, Player gArr[], int ghostCount)
     s->SetPos(centre);
     // Anzahl der Münzen vom Labyrinth übernehmen
     coinCount = lab->GetCoinCount();
+
+#if defined(USE_NCURSES)
+    nodelay(lab->GetWindowHandle(), TRUE);
+#endif
 }
 
 // Einen Schritt im Spiel ausführen
@@ -89,12 +107,32 @@ void PacMan::Step()
     }
 }
 
+int PacMan::CheckForInput()
+{
+    this_thread::sleep_for(chrono::milliseconds(300));
+#if defined(USE_NCURSES)
+    qiflush();
+    int c = toupper(wgetch(lab->GetWindowHandle()));
+    while (wgetch(lab->GetWindowHandle()) != ERR);
+    return c;
+#else
+    if (_kbhit())
+    {
+        return toupper(getch());
+    }
+    else
+    {
+        return 'x';
+    }
+#endif
+}
+
 void PacMan::Play()
 {
     // Das Spiel läuft solange noch Münzen im Labyrinth sind
     // und eine Geist nicht auf der Position des Spielers ist.
     // Temporäre Variable für die Keyboard-Eingabe
-    char c = 'x';
+    int c = 'x';
     // Temporäre Variable, um die gewählte Richtung zu speichern
     Direction r = s->GetPos().r;
     // Position des Spielers einzeichnen
@@ -103,41 +141,47 @@ void PacMan::Play()
     bool cond = (coinCount > 1);
     while (cond)
     {
-        // Eine Weile warten (C++11)
-        this_thread::sleep_for(chrono::milliseconds(700));
-        if (_kbhit())
-        { // wenn Taste gedrückt wurde ...
-            c = toupper(getch());
-            switch (int(c))
-            {
-            case ARROW_UP_KEY:
-                r = UP;
-                break;
-            case ARROW_LEFT_KEY:
-                r = LEFT;
-                break;
-            case ARROW_RIGHT_KEY:
-                r = RIGHT;
-                break;
-            case ARROW_DOWN_KEY:
-                r = DOWN;
-                break;
-            case Q_KEY:
-                coinCount = 0;
-                break;
-            }
-            s->SetDirection(r);
+        c = CheckForInput();
+        switch (c)
+        {
+        case KEY_UP:
+            r = UP;
+            break;
+        case KEY_LEFT:
+            r = LEFT;
+            break;
+        case KEY_RIGHT:
+            r = RIGHT;
+            break;
+        case KEY_DOWN:
+            r = DOWN;
+            break;
+        case KEY_Q:
+            coinCount = 0;
+            break;
         }
+        s->SetDirection(r);
         // Einen Spielschritt ausführen
         Step();
         // Neue Spielsituation anzeigen
         lab->Print();
+#if defined(USE_NCURSES)
+        stringstream sbuff;
+        sbuff << "Richtung: " << s->GetPos().r << endl;
+        sbuff << "Gesammelte Muenzen: " << s->GetCoinCount() << endl;
+        sbuff << "Verbleibende Muenzen: " << coinCount << endl;
+        sbuff << steps << ". Schritt" << endl
+              << endl;
+        sbuff << "Zum Abbrechen q druecken" << endl;
+        mvwprintw(lab->GetWindowHandle(), Labyrinth::maxRowCount + 1, 0, sbuff.str().c_str());
+#else
         cout << "Richtung: " << s->GetPos().r << endl;
         cout << "Gesammelte Muenzen: " << s->GetCoinCount() << endl;
         cout << "Verbleibende Muenzen: " << coinCount << endl;
         cout << steps << ". Schritt" << endl
              << endl;
         cout << "Zum Abbrechen q druecken" << endl;
+#endif
         // Prüfen, ob noch Münzen da sind
         // und ob der Spieler noch nicht gefangen wurde
         cond = (coinCount > 1);

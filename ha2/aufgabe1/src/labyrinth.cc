@@ -7,15 +7,29 @@
 
 #if defined(USE_USER_CONIO)
 #include "user_conio.h"
+#elif defined(USE_NCURSES)
+#include <ncurses.h>
 #else
 #include <conio.h>
 #endif
 
+#if defined(USE_USER_CONIO)
 #define clear_console()         \
     do                          \
     {                           \
         cout << "\033[H\033[J"; \
     } while (0)
+#elif defined(USE_NCURSES)
+#define clear_console()
+#define KEY_Q ('Q')
+#else
+#define clear_console() clrscr()
+#define KEY_UP ('W')
+#define KEY_LEFT ('A')
+#define KEY_RIGHT ('D')
+#define KEY_DOWN ('S')
+#define KEY_Q ('Q')
+#endif
 
 extern int min(int a, int b);
 extern int max(int a, int b);
@@ -29,44 +43,66 @@ Labyrinth::Labyrinth()
     rowCount = maxRowCount;
     columnCount = maxColumnCount;
     Clear();
+
+#if defined(USE_NCURSES)
+    initscr();
+    noecho();
+    labWin = newwin(maxRowCount + 1, 80, 0, 0);
+    keypad(labWin, TRUE);
+    cbreak();
+    refresh();
+#endif
 }
 
 Labyrinth::~Labyrinth()
 {
+#if defined(USE_NCURSES)
+    delwin(labWin);
+    endwin();
+#endif
 }
 
 void Labyrinth::Build()
 {
-    char c = 'x';
+    int c = 'x';
     int posx = maxColumnCount / 2;
     int posy = maxRowCount / 2;
     labyrinth[posy][posx] = CURSOR;
-    Print();
-    while (c != Q_KEY)
+    do
     {
         Print();
-        cout << "Laufen mit Pfeiltasten. Beenden mit q." << endl;
+        const char *info = "Laufen mit Pfeiltasten. Beenden mit 'Q'.";
+#if defined(USE_NCURSES)
+        mvwprintw(labWin, rowCount, 0, info);
+        waddch(labWin, '\n');
+#else
+        cout << info << endl;
+#endif
         labyrinth[posy][posx] = PATH;
+#if defined(USE_NCURSES)
+        c = toupper(wgetch(labWin));
+#else
         c = toupper(getch());
-        switch (int(c))
+#endif
+        switch (c)
         {
-        case ARROW_UP_KEY:
+        case KEY_UP:
             posy = max(1, posy - 1);
             break;
-        case ARROW_LEFT_KEY:
+        case KEY_LEFT:
             posx = max(1, posx - 1);
             break;
-        case ARROW_RIGHT_KEY:
+        case KEY_RIGHT:
             posx = min(maxColumnCount - 2, posx + 1);
             break;
-        case ARROW_DOWN_KEY:
+        case KEY_DOWN:
             posy = min(maxRowCount - 2, posy + 1);
             break;
-        case Q_KEY:
+        case KEY_Q:
             break;
         }
         labyrinth[posy][posx] = CURSOR;
-    }
+    } while (c != KEY_Q);
 }
 
 void Labyrinth::Clear()
@@ -81,11 +117,19 @@ void Labyrinth::Clear()
 
 void Labyrinth::Print() const
 {
+#if defined(USE_NCURSES)
+    for (int i = 0; i < rowCount; i++)
+    {
+        mvwprintw(labWin, i, 0, labyrinth[i]);
+    }
+    wrefresh(labWin);
+#else
     clear_console();
     for (auto &row : labyrinth)
     {
         cout << row;
     }
+#endif
 }
 
 void Labyrinth::PlaceCoins()
@@ -128,6 +172,13 @@ int Labyrinth::GetCoinCount() const
 {
     return coinCount;
 }
+
+#if defined(USE_NCURSES)
+WINDOW *Labyrinth::GetWindowHandle() const
+{
+    return labWin;
+}
+#endif
 
 char Labyrinth::GetCharAt(const Position &pos) const
 {

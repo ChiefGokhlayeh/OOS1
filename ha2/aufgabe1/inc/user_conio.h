@@ -13,11 +13,11 @@
  * default MIT license. */
 
 /* NOT PART OF THE EXERCISE! USED ONLY TO ALLOW EASY PORTABILITY TO GCC! */
-#define ARROW_UP_KEY ('W')
-#define ARROW_LEFT_KEY ('A')
-#define ARROW_RIGHT_KEY ('D')
-#define ARROW_DOWN_KEY ('S')
-#define Q_KEY ('Q')
+#define KEY_UP ('W')
+#define KEY_LEFT ('A')
+#define KEY_RIGHT ('D')
+#define KEY_DOWN ('S')
+#define KEY_Q ('Q')
 
 /* reads from keypress, doesn't echo */
 int getch(void);
