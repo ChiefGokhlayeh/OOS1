@@ -107,7 +107,7 @@ void PacMan::Play()
         this_thread::sleep_for(chrono::milliseconds(700));
         if (_kbhit())
         { // wenn Taste gedrückt wurde ...
-            c = getch();
+            c = toupper(getch());
             switch (int(c))
             {
             case ARROW_UP_KEY:
