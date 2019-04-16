@@ -7,7 +7,7 @@ target_include_directories(lib_user_conio PUBLIC inc)
 
 add_library(lib_${PROJECT_NAME} src/labyrinth.cc src/position.cc)
 target_include_directories(lib_${PROJECT_NAME} PRIVATE inc)
-target_compile_definitions(lib_${PROJECT_NAME} PRIVATE -D USE_USER_CONIO)
+target_compile_definitions(lib_${PROJECT_NAME} PUBLIC -D USE_USER_CONIO)
 target_link_libraries(lib_${PROJECT_NAME} lib_user_conio)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
