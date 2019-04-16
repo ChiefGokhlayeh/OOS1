@@ -1,12 +1,16 @@
 #include "mystring.hh"
 #include "pacman.hh"
 
-const bool build = false;
+#include <iostream>
+
+char build = true;
 
 int main()
 {
+    std::cout << "Moechten Sie zunächst ein Labyrinth bauen (j/n): ";
+    std::cin >> build;
     Labyrinth lab;
-    if (build)
+    if (build == 'j')
     {
         lab.Build();
         lab.Export("lab.txt");
