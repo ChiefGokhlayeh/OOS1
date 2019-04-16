@@ -151,9 +151,22 @@ void Labyrinth::Export(const char *filename) const
 
     if (ofs.is_open())
     {
-        for (auto &line : labyrinth)
+        for (const auto &line : labyrinth)
         {
-            ofs << line;
+            for (auto c : line)
+            {
+                if (c != EOS)
+                {
+                    if (c == CURSOR)
+                    {
+                        ofs << char(PATH);
+                    }
+                    else
+                    {
+                        ofs << c;
+                    }
+                }
+            }
         }
 
         ofs.close();
