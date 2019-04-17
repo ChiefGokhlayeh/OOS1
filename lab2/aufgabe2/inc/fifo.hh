@@ -36,7 +36,7 @@ class Fifo
 
     bool IsFull() const
     {
-        return !IsEmpty();
+        return elemCount == capacity;
     }
 
     int Push(T data)
