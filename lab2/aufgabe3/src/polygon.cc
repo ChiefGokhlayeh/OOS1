@@ -56,6 +56,8 @@ void PolygonPoint::Print(bool lf) const
     {
         next->point.Print(false);
         next = next->GetNext();
+        if (next != nullptr)
+            cout << " - ";
     } while (next != nullptr);
 
     if (lf)
