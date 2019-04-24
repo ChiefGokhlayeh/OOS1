@@ -18,7 +18,7 @@ class PolygonPoint
     void Print(bool lf = true) const;
 
   private:
-    Point &point;
+    Point point;
     PolygonPoint *next;
 };
 

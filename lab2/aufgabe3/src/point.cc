@@ -34,7 +34,7 @@ void Point::Move(double dx, double dy)
     y += dy;
 }
 
-void Point::Print(bool lf)
+void Point::Print(bool lf) const
 {
     cout << "(" << x << ", " << y << ")";
     if (lf)
