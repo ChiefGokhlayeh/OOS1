@@ -128,7 +128,7 @@ Polygon &Polygon::AddPoint(Point &point)
 
 Polygon &Polygon::Append(const Polygon &polygon)
 {
-    /* Do to owner-ship issues over who owns a PolygonPoint it is better to copy
+    /* Due to ownership issues over who owns a PolygonPoint it is better to copy
      * every element from the other polygon before appending. */
     if (root == nullptr)
     {
