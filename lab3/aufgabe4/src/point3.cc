@@ -10,7 +10,7 @@ Point::Point(int x, int y) : x(x), y(y)
 {
 }
 
-Point::Point(const char* c)
+Point::Point(const char *c)
 {
     stringstream buf(c);
     buf >> *this;
@@ -71,31 +71,31 @@ istream &operator>>(istream &is, Point &p)
     {
         switch (is.get())
         {
-            case '(':
-                if (!started)
-                {
-                    is >> p.x;
-                }
-                started = true;
-                break;
-            case ',':
-                if (started)
-                {
-                    is >> p.y;
-                }
-                break;
-            case ')':
-                done = true;
-                break;
-            default:
-                /* ignore */
-                break;
+        case '(':
+            if (!started)
+            {
+                is >> p.x;
+            }
+            started = true;
+            break;
+        case ',':
+            if (started)
+            {
+                is >> p.y;
+            }
+            break;
+        case ')':
+            done = true;
+            break;
+        default:
+            /* ignore */
+            break;
         }
     }
     return is;
 }
 
-ostream &operator<<(ostream &os, Point &p)
+ostream &operator<<(ostream &os, const Point &p)
 {
     os << p.ToString();
     return os;

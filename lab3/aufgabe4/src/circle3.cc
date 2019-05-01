@@ -9,7 +9,7 @@ Circle::Circle(const Point &c, double r) : centre(c), radius(r)
 {
 }
 
-Circle::Circle(const char* c)
+Circle::Circle(const char *c)
 {
     stringstream buf(c);
     buf >> *this;
@@ -71,31 +71,31 @@ istream &operator>>(istream &is, Circle &c)
     {
         switch (is.get())
         {
-            case '<':
-                if (!started)
-                {
-                    is >> c.centre;
-                }
-                started = true;
-                break;
-            case ',':
-                if (started)
-                {
-                    is >> c.radius;
-                }
-                break;
-            case '>':
-                done = true;
-                break;
-            default:
-                /* ignore */
-                break;
+        case '<':
+            if (!started)
+            {
+                is >> c.centre;
+            }
+            started = true;
+            break;
+        case ',':
+            if (started)
+            {
+                is >> c.radius;
+            }
+            break;
+        case '>':
+            done = true;
+            break;
+        default:
+            /* ignore */
+            break;
         }
     }
     return is;
 }
 
-ostream &operator<<(ostream &os, Circle &c)
+ostream &operator<<(ostream &os, const Circle &c)
 {
     os << c.ToString();
     return os;

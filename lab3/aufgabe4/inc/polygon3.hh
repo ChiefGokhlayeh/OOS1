@@ -40,11 +40,11 @@ class Polygon
     void Move(double dx, double dy);
     void Print(bool lf = true) const;
     std::string ToString() const;
-    Polygon &AddPoint(Point &point);
+    Polygon &AddPoint(const Point &point);
     Polygon &Append(const Polygon &polygon);
 
     friend std::istream &operator>>(std::istream &is, Polygon &poly);
-    friend std::ostream &operator<<(std::ostream &os, Polygon &poly);
+    friend std::ostream &operator<<(std::ostream &os, const Polygon &poly);
 
   private:
     PolygonPoint *root;

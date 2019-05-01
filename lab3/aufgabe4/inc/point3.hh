@@ -22,7 +22,7 @@ class Point
     std::string ToString() const;
 
     friend std::istream &operator>>(std::istream &is, Point &p);
-    friend std::ostream &operator<<(std::ostream &os, Point &p);
+    friend std::ostream &operator<<(std::ostream &os, const Point &p);
 
   private:
     double x, y;

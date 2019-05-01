@@ -92,12 +92,14 @@ Polygon::Polygon(const Point &p)
 }
 
 Polygon::Polygon(const char *c)
+    : root(nullptr)
 {
     stringstream buf(c);
     buf >> *this;
 }
 
 Polygon::Polygon(const string &str)
+    : root(nullptr)
 {
     stringstream buf(str);
     buf >> *this;
@@ -135,7 +137,7 @@ string Polygon::ToString() const
     return buf.str();
 }
 
-Polygon &Polygon::AddPoint(Point &point)
+Polygon &Polygon::AddPoint(const Point &point)
 {
     if (root == nullptr)
     {
@@ -176,33 +178,35 @@ Polygon &Polygon::Append(const Polygon &polygon)
 istream &operator>>(istream &is, Polygon &poly)
 {
     bool started = false;
-    PolygonPoint *cur = nullptr;
-    while (!is.eof())
+    bool done = false;
+    while (!is.eof() && !done)
     {
         switch (is.get())
         {
-            case '|':
-                if (!started)
-                {
-                    Point point;
-                    is >> point;
-                    poly.root = new PolygonPoint(point);
-                    cur = poly.root;
-                }
-                started = true;
-                break;
-            case '-':
-                if (started)
-                {
-                    Point point;
-                    is >> point;
-                    cur->SetNext(new PolygonPoint(point));
-                    cur = cur->GetNext();
-                }
-                break;
-            default:
-                /* ignore */
-                break;
+        case '|':
+            if (started)
+            {
+                done = true;
+            }
+            else
+            {
+                Point point;
+                is >> point;
+                poly.AddPoint(point);
+            }
+            started = true;
+            break;
+        case '-':
+            if (started)
+            {
+                Point point;
+                is >> point;
+                poly.AddPoint(point);
+            }
+            break;
+        default:
+            /* ignore */
+            break;
         }
     }
     return is;
