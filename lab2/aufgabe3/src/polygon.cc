@@ -4,10 +4,19 @@
 
 using namespace std;
 
-PolygonPoint::PolygonPoint(Point &p, PolygonPoint *next)
+PolygonPoint::PolygonPoint(const Point &p, PolygonPoint *next)
     : point(p),
       next(next)
 {
+}
+
+PolygonPoint::PolygonPoint(const PolygonPoint &orig)
+    : point(orig.point)
+{
+    if (orig.HasNext())
+    {
+        next = new PolygonPoint(*orig.next);
+    }
 }
 
 PolygonPoint::~PolygonPoint()
@@ -69,7 +78,7 @@ Polygon::Polygon()
 {
 }
 
-Polygon::Polygon(Point &p)
+Polygon::Polygon(const Point &p)
     : root(new PolygonPoint(p))
 {
 }
@@ -108,7 +117,7 @@ Polygon &Polygon::AddPoint(Point &point)
     else
     {
         PolygonPoint *p = root;
-        while (p->GetNext() != nullptr)
+        while (p->HasNext())
             p = p->GetNext();
 
         p->SetNext(new PolygonPoint(point));
@@ -117,19 +126,21 @@ Polygon &Polygon::AddPoint(Point &point)
     return *this;
 }
 
-Polygon &Polygon::Append(Polygon &polygon)
+Polygon &Polygon::Append(const Polygon &polygon)
 {
+    /* Do to owner-ship issues over who owns a PolygonPoint it is better to copy
+     * every element from the other polygon before appending. */
     if (root == nullptr)
     {
-        root = polygon.root;
+        root = new PolygonPoint(*polygon.root);
     }
     else
     {
         PolygonPoint *p = root;
-        while (p->GetNext() != nullptr)
+        while (p->HasNext())
             p = p->GetNext();
 
-        p->SetNext(polygon.root);
+        p->SetNext(new PolygonPoint(*polygon.root));
     }
 
     return *this;
