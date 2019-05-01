@@ -46,6 +46,9 @@ class Polygon
     friend std::istream &operator>>(std::istream &is, Polygon &poly);
     friend std::ostream &operator<<(std::ostream &os, const Polygon &poly);
 
+    Polygon &operator+(const Point &p);
+    Polygon &operator+(const Polygon &b);
+
   private:
     PolygonPoint *root;
 };

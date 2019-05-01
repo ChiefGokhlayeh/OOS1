@@ -100,3 +100,92 @@ ostream &operator<<(ostream &os, const Point &p)
     os << p.ToString();
     return os;
 }
+
+Point operator-(Point a)
+{
+    a.SetX(-a.GetX());
+    a.SetY(-a.GetY());
+    return a;
+}
+
+Point operator+(Point a, const Point &b)
+{
+    a.Move(b.GetX(), b.GetY());
+    return a;
+}
+
+Point operator+(Point a, const double &b)
+{
+    a.Move(b, b);
+    return a;
+}
+
+Point operator+(const double &a, const Point &b)
+{
+    return b + a;
+}
+
+Point &Point::operator+=(const Point &a)
+{
+    Move(a.GetX(), a.GetY());
+    return *this;
+}
+
+Point &Point::operator+=(const double &a)
+{
+    Move(a, a);
+    return *this;
+}
+
+Point operator-(const Point &a, const Point &b)
+{
+    return a + (-b);
+}
+
+Point operator-(const Point &a, const double &b)
+{
+    return a + (-b);
+}
+
+Point operator-(const double &a, const Point &b)
+{
+    return b - a;
+}
+
+Point &Point::operator-=(const Point &a)
+{
+    Move(-a.GetX(), -a.GetY());
+    return *this;
+}
+
+Point &Point::operator-=(const double &a)
+{
+    Move(-a, -a);
+    return *this;
+}
+
+Point &Point::operator++()
+{
+    Move(1, 1);
+    return *this;
+}
+
+Point Point::operator++(int)
+{
+    Point tmp(*this);
+    operator++();
+    return tmp;
+}
+
+Point &Point::operator--()
+{
+    Move(-1, -1);
+    return *this;
+}
+
+Point Point::operator--(int)
+{
+    Point tmp(*this);
+    operator--();
+    return tmp;
+}

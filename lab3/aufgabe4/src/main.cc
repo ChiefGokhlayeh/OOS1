@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "circle3.hh"
 #include "polygon3.hh"
 
@@ -6,17 +7,37 @@ using namespace std;
 
 int main(void)
 {
-    string str1("(1.1,2.1)");
-    string str2("<(5.5, 6.6), 10.1>");
-    string str3("|(1.1,1.2) - (2.1, 2.2) -(3.1,3.2) |");
-    Point p(str1);
-    Circle c(str2);
-    Polygon l(str3);
-
-    cout << p << endl;
-    cout << c << endl;
-    c.Move(1.0, 2.0);
-    cout << c << endl;
-    cout << l << endl;
+    Point p1(0, 0);
+    const Point p2(2, 2);
+    const Point p3(3, 3);
+    Circle c(p1, 1.1);
+    cout << "Circle c: " << c << endl;
+    p1 = p1 + 0.5;
+    p1 = 0.5 + p1;
+    cout << "p1: " << p1 << endl;
+    cout << "p2: " << p2 << endl;
+    cout << "p3: " << p3 << endl;
+    Point p4 = p1 + p2 - p3 + 4.0;
+    cout << "p4: " << p4 << endl;
+    p1 = -p4;
+    cout << "p1: " << p1 << endl;
+    cout << "p4: " << p4 << endl;
+    Point p5 = p1++;
+    cout << "p5: " << p5 << endl;
+    cout << "p1: " << p1 << endl;
+    p5 = ++++++++p1;
+    cout << "p5: " << p5 << endl;
+    cout << "p1: " << p1 << endl;
+    cout << "p2: " << p2 << endl;
+    cout << "p3: " << p3 << endl;
+    cout << "p4: " << p4 << endl;
+    Polygon l1;
+    cout << "l1: " << l1 << endl;
+    (l1 + p1) + p2;
+    cout << "l1: " << l1 << endl;
+    const Polygon l2(p4);
+    l1 + l2;
+    cout << "l1: " << l1 << endl;
+    cout << "l2: " << l2 << endl;
     return 0;
 }

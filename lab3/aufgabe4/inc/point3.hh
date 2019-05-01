@@ -24,6 +24,23 @@ class Point
     friend std::istream &operator>>(std::istream &is, Point &p);
     friend std::ostream &operator<<(std::ostream &os, const Point &p);
 
+    friend Point operator-(Point a);
+    friend Point operator+(Point a, const Point &b);
+    friend Point operator+(Point a, const double &b);
+    friend Point operator+(const double &a, const Point &b);
+    Point &operator+=(const Point &a);
+    Point &operator+=(const double &a);
+    friend Point operator-(const Point &a, const Point &b);
+    friend Point operator-(const Point &a, const double &b);
+    friend Point operator-(const double &a, const Point &b);
+    Point &operator-=(const Point &a);
+    Point &operator-=(const double &a);
+
+    Point &operator++();
+    Point operator++(int);
+    Point &operator--();
+    Point operator--(int);
+
   private:
     double x, y;
 };

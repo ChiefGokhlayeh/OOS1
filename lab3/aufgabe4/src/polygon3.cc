@@ -217,3 +217,13 @@ ostream &operator<<(ostream &os, const Polygon &poly)
     os << poly.ToString();
     return os;
 }
+
+Polygon &Polygon::operator+(const Point &p)
+{
+    return AddPoint(p);
+}
+
+Polygon &Polygon::operator+(const Polygon &p)
+{
+    return Append(p);
+}
