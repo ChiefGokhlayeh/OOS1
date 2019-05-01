@@ -1,6 +1,6 @@
 project(lab3_aufgabe1)
 
-add_library(lib_${PROJECT_NAME} src/vehicle.cc)
+add_library(lib_${PROJECT_NAME} src/vehicle2.cc)
 target_include_directories(lib_${PROJECT_NAME} PUBLIC inc)
 target_link_libraries(lib_${PROJECT_NAME} lib_ha3_aufgabe3)
 
