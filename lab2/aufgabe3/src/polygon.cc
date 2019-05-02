@@ -108,7 +108,7 @@ void Polygon::Print(bool lf) const
         cout << endl;
 }
 
-Polygon &Polygon::AddPoint(Point &point)
+Polygon &Polygon::AddPoint(const Point &point)
 {
     if (root == nullptr)
     {

@@ -14,7 +14,7 @@ class Circle
     void SetCentre(const Point &centre);
 
     void Move(double dx, double dy);
-    void Print(bool lf = true);
+    void Print(bool lf = true) const;
 
   private:
     Point centre;

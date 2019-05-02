@@ -32,7 +32,7 @@ public:
 
   void Move(double dx, double dy);
   void Print(bool lf = true) const;
-  Polygon &AddPoint(Point &point);
+  Polygon &AddPoint(const Point &point);
   Polygon &Append(const Polygon &polygon);
 
 private:

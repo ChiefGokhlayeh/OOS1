@@ -33,7 +33,7 @@ void Circle::Move(double dx, double dy)
     centre.Move(dx, dy);
 }
 
-void Circle::Print(bool lf)
+void Circle::Print(bool lf) const
 {
     cout << "<";
     centre.Print(false);
