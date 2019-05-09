@@ -5,6 +5,7 @@
 using namespace std;
 
 double Vehicle::totalKm = 0;
+int Vehicle::counter = 0;
 
 double Vehicle::GetTotalKm()
 {
@@ -35,7 +36,7 @@ void Vehicle::Drive(double km)
     Vehicle::totalKm += km;
 }
 
-ostream &operator<<(ostream &os, const Vehicle& v)
+ostream &operator<<(ostream &os, const Vehicle &v)
 {
     os << "Kz = " << v.registration << " VIN = " << v.vin << " km = " << v.km;
     return os;

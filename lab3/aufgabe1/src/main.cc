@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-int Vehicle::counter = 0;
-
 using namespace std;
 
 int main()
