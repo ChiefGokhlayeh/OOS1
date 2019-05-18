@@ -8,7 +8,9 @@
 # Binary files
 *.o
 _build/
+build/
 _install/
+install
 
 # CMake
 CMakeLists.txt.user
