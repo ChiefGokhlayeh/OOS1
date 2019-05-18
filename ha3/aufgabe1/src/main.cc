@@ -1,4 +1,4 @@
-#include "ObjectCounter.hh"
+#include "objectcounter.hh"
 
 #include <iostream>
 #include <stdlib.h>
