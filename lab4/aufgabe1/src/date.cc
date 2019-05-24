@@ -67,4 +67,5 @@ Datum Datum::operator+(int tage)
 ostream &operator<<(ostream &os, const Datum &d)
 {
     os << d.tag << "." << d.monat << "." << d.jahr;
+    return os;
 }

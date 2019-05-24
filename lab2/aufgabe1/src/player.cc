@@ -43,6 +43,7 @@ void Player::IncrementCoinCount()
 const Player &Player::Step(const Labyrinth &lab)
 {
     pos.Step(lab);
+    return *this;
 }
 
 void Player::Turn(const Labyrinth &lab)
