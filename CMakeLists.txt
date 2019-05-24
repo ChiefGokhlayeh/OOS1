@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_COLOR_MAKEFILE ON)
 
+if (POLICY CMP0072)
+    cmake_policy (SET CMP0072 NEW)
+endif(POLICY CMP0072)
+
 add_subdirectory(ha1/aufgabe1)
 add_subdirectory(ha1/aufgabe2)
 add_subdirectory(ha1/aufgabe3)
@@ -30,3 +34,4 @@ add_subdirectory(ha4/aufgabe1)
 add_subdirectory(ha4/aufgabe2)
 add_subdirectory(ha4/aufgabe3)
 add_subdirectory(lab4/aufgabe1)
+add_subdirectory(sfml_demo)
