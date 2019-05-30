@@ -8,29 +8,35 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/mnt/c/git/OOS1/_build/${input:application}",
+            "cwd": "${workspaceRoot}/build",
+            "program": "${workspaceRoot}/build/${input:application}",
             "args": [],
             "stopAtEntry": true,
-            "cwd": "/mnt/c/git/OOS1/_build",
             "environment": [],
             "externalConsole": true,
-            "windows": {
-                "MIMode": "gdb",
-                "setupCommands": [{
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
-                }]
+                }
+            ],
+            "windows": {
+                "cwd": "/mnt/c/git/OOS1/_build",
+                "program": "/mnt/c/git/OOS1/_build/${input:application}",
+                "pipeTransport": {
+                    "debuggerPath": "/usr/bin/gdb",
+                    "pipeProgram": "C:\\Windows\\System32\\bash.exe",
+                    "pipeArgs": [
+                        "-c"
+                    ],
+                    "pipeCwd": ""
+                },
+                "sourceFileMap": {
+                    "/mnt/c": "c:\\"
+                }
             },
-            "pipeTransport": {
-                "debuggerPath": "/usr/bin/gdb",
-                "pipeProgram": "C:\\Windows\\System32\\bash.exe",
-                "pipeArgs": ["-c"],
-                "pipeCwd": ""
-            },
-            "sourceFileMap": {
-                "/mnt/c": "c:\\"
-            }
         }
     ],
     "inputs": [
