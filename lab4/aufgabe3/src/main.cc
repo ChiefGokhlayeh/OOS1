@@ -112,9 +112,8 @@ class D2 : public C1, public C2, public C3
 public:
     D2(int C1_a = 0xD2C1A, int C2_a = 0xD2C2A, int C3_a = 0xD2C3A,
        int C1_b = 0xD2C1B, int C2_b = 0xD2C2B, int C3_b = 0xD2C3B)
-        : C1(C1_a, C1_b), C2(C2_a, C2_b), C3(C3_a, C3_b)
+        : C1(C1_a, C1_b), C2(C2_a, C2_b), C3(C3_a, C3_b), B(0x0, 0xD2B)
     {
-        C1::b = 0xD2B;
     }
     void print()
     {

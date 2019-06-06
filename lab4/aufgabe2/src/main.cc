@@ -68,7 +68,7 @@ int main()
     cout << "a.g(\"a\") ";
     a.g("a");
     cout << "b.g(\"a\") ";
-    //b.g("a");
+    b.A::g("a");
     cout << "a.h(1) ";
     a.h(1);
     cout << "b.h(1) ";
