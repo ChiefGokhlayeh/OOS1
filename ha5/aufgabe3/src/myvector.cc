@@ -1,6 +1,6 @@
 #include "myvector.hh"
-#include "myvectordata.hh"
-#include "dummyvectordata.hh"
+#include "mydata.hh"
+#include "dummydata.hh"
 
 #include <algorithm>
 #include <iostream>
@@ -8,7 +8,7 @@
 
 using namespace std;
 
-static void CopyData(MyVectorData *dest[], const MyVectorData *const src[], size_t elemCount)
+static void CopyData(MyData *dest[], const MyData *const src[], size_t elemCount)
 {
     for (size_t i = 0; i < elemCount; ++i)
     {
@@ -21,7 +21,7 @@ MyVector::MyVector()
 {
     dataSize = 0;
     dataCapacity = 0;
-    dataPtr = new MyVectorData *[dataCapacity];
+    dataPtr = new MyData *[dataCapacity];
 }
 
 MyVector::MyVector(const MyVector &myvec)
@@ -29,7 +29,7 @@ MyVector::MyVector(const MyVector &myvec)
 {
     dataSize = myvec.dataSize;
     dataCapacity = myvec.dataCapacity;
-    dataPtr = new MyVectorData *[dataCapacity];
+    dataPtr = new MyData *[dataCapacity];
 
     CopyData(dataPtr, myvec.dataPtr, dataSize);
 }
@@ -49,7 +49,7 @@ void MyVector::Reserve(unsigned int c)
 {
     if (c > dataCapacity)
     {
-        MyVectorData **newDataPtr = new MyVectorData *[c];
+        MyData **newDataPtr = new MyData *[c];
         if (dataPtr != nullptr)
         {
             CopyData(newDataPtr, dataPtr, dataSize);
@@ -78,7 +78,7 @@ MyVector &MyVector::Assign(const MyVector &myvec)
     {
         delete[] dataPtr;
     }
-    dataPtr = new MyVectorData *[myvec.dataCapacity];
+    dataPtr = new MyData *[myvec.dataCapacity];
     CopyData(dataPtr, myvec.dataPtr, myvec.dataCapacity);
     dataSize = myvec.dataSize;
     dataCapacity = myvec.dataCapacity;
@@ -100,12 +100,12 @@ bool MyVector::Empty() const
     return dataSize == 0;
 }
 
-MyVectorData &MyVector::At(unsigned int i)
+MyData &MyVector::At(unsigned int i)
 {
     if (i >= dataSize)
     {
         /* This is stupid. A API caller might change the value of nullVec, but
-        due to spec we HAVE to return a reference to an empty DummyVectorData on
+        due to spec we HAVE to return a reference to an empty DummyData on
         out-of-bounds. */
         return nullVec;
     }
@@ -115,9 +115,9 @@ MyVectorData &MyVector::At(unsigned int i)
     }
 }
 
-void MyVector::PushBack(const MyVectorData &data)
+void MyVector::PushBack(const MyData &data)
 {
-    MyVectorData *clone = data.Clone();
+    MyData *clone = data.Clone();
 
     if (dataSize == dataCapacity)
     {
@@ -191,7 +191,7 @@ bool MyVector::operator==(const MyVector &other) const
     }
 }
 
-MyVectorData &MyVector::operator[](unsigned int i)
+MyData &MyVector::operator[](unsigned int i)
 {
     return At(i);
 }

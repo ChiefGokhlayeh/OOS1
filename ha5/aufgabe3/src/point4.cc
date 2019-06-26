@@ -1,5 +1,5 @@
 #include "point4.hh"
-#include "myvectordata.hh"
+#include "mydata.hh"
 
 #include <iostream>
 #include <sstream>
@@ -201,22 +201,22 @@ Point Point::operator--(int)
     return tmp;
 }
 
-Point &Point::operator=(const MyVectorData &other)
+Point &Point::operator=(const MyData &other)
 {
-    const Point *p = dynamic_cast<Point *>(const_cast<MyVectorData *>(&other));
+    const Point *p = dynamic_cast<Point *>(const_cast<MyData *>(&other));
     x = p->x;
     y = p->y;
     return *this;
 }
 
-bool Point::operator==(const MyVectorData &other) const
+bool Point::operator==(const MyData &other) const
 {
-    const Point *p = dynamic_cast<Point *>(const_cast<MyVectorData *>(&other));
+    const Point *p = dynamic_cast<Point *>(const_cast<MyData *>(&other));
     return p != nullptr && p->x == x && p->y == y;
 }
 
-bool Point::operator!=(const MyVectorData &other) const
+bool Point::operator!=(const MyData &other) const
 {
-    const Point *p = dynamic_cast<Point *>(const_cast<MyVectorData *>(&other));
+    const Point *p = dynamic_cast<Point *>(const_cast<MyData *>(&other));
     return p == nullptr || p->x != x || p->y != y;
 }

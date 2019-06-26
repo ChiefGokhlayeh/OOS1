@@ -7,7 +7,7 @@
 #include <istream>
 #include <ostream>
 
-class Circle : public MyVectorData
+class Circle : public MyData
 {
 public:
     Circle(const Point &c = Point(), double r = 1.0);
@@ -26,9 +26,9 @@ public:
     virtual Circle *Clone() const override;
     virtual void Print() const override;
 
-    virtual Circle &operator=(const MyVectorData &other) override;
-    virtual bool operator==(const MyVectorData &other) const override;
-    virtual bool operator!=(const MyVectorData &other) const override;
+    virtual Circle &operator=(const MyData &other) override;
+    virtual bool operator==(const MyData &other) const override;
+    virtual bool operator!=(const MyData &other) const override;
 
     friend std::istream &operator>>(std::istream &is, Circle &c);
     friend std::ostream &operator<<(std::ostream &os, const Circle &c);

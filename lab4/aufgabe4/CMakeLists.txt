@@ -5,4 +5,4 @@ target_include_directories(lib_${PROJECT_NAME} PUBLIC inc)
 target_link_libraries(lib_${PROJECT_NAME} PUBLIC lib_ha3_aufgabe1)
 
 add_executable(app_${PROJECT_NAME} src/main.cc)
-target_link_libraries(app_${PROJECT_NAME} PUBLIC lib_${PROJECT_NAME})
+target_link_libraries(app_${PROJECT_NAME} lib_${PROJECT_NAME})

@@ -72,23 +72,23 @@ Circle *Circle::Clone() const
     return new Circle(*this);
 }
 
-Circle &Circle::operator=(const MyVectorData &other)
+Circle &Circle::operator=(const MyData &other)
 {
-    const Circle *c = dynamic_cast<Circle *>(const_cast<MyVectorData *>(&other));
+    const Circle *c = dynamic_cast<Circle *>(const_cast<MyData *>(&other));
     radius = c->radius;
     centre = c->centre;
     return *this;
 }
 
-bool Circle::operator==(const MyVectorData &other) const
+bool Circle::operator==(const MyData &other) const
 {
-    const Circle *c = dynamic_cast<Circle *>(const_cast<MyVectorData *>(&other));
+    const Circle *c = dynamic_cast<Circle *>(const_cast<MyData *>(&other));
     return c != nullptr && c->radius == radius && c->centre == centre;
 }
 
-bool Circle::operator!=(const MyVectorData &other) const
+bool Circle::operator!=(const MyData &other) const
 {
-    const Circle *c = dynamic_cast<Circle *>(const_cast<MyVectorData *>(&other));
+    const Circle *c = dynamic_cast<Circle *>(const_cast<MyData *>(&other));
     return c == nullptr || c->radius != radius || c->centre != centre;
 }
 

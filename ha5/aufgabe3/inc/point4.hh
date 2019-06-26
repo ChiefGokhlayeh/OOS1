@@ -1,13 +1,13 @@
 #ifndef POINT_HH_
 #define POINT_HH_
 
-#include "myvectordata.hh"
+#include "mydata.hh"
 
 #include <string>
 #include <istream>
 #include <ostream>
 
-class Point : public MyVectorData
+class Point : public MyData
 {
 public:
     Point(int x = 0, int y = 0);
@@ -46,9 +46,9 @@ public:
     Point &operator--();
     Point operator--(int);
 
-    virtual Point &operator=(const MyVectorData &other) override;
-    virtual bool operator==(const MyVectorData &other) const override;
-    virtual bool operator!=(const MyVectorData &other) const override;
+    virtual Point &operator=(const MyData &other) override;
+    virtual bool operator==(const MyData &other) const override;
+    virtual bool operator!=(const MyData &other) const override;
 
 private:
     double x, y;
