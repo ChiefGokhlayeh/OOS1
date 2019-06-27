@@ -2,7 +2,7 @@
 #define CIRCLE_HH_
 
 #include "point5.hh"
-#include "onedimobject2.hh"
+#include "onedimobject.hh"
 
 #include <string>
 #include <istream>

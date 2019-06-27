@@ -1,4 +1,4 @@
-#include "point4.hh"
+#include "point6.hh"
 
 #include <iostream>
 #include <sstream>

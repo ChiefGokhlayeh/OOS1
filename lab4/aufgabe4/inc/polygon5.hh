@@ -1,7 +1,7 @@
 #ifndef POLYGON_HH_
 #define POLYGON_HH_
 
-#include "point4.hh"
+#include "point5.hh"
 #include "onedimobject.hh"
 
 #include <string>

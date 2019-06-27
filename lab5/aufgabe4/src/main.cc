@@ -1,5 +1,5 @@
-#include "circle5.hh"
-#include "polygon5.hh"
+#include "circle6.hh"
+#include "polygon6.hh"
 #include "rectangle.hh"
 
 #include <iostream>

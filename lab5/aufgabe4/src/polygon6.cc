@@ -1,4 +1,4 @@
-#include "polygon4.hh"
+#include "polygon6.hh"
 
 #include <iostream>
 #include <sstream>

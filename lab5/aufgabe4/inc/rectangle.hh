@@ -2,7 +2,7 @@
 #define RECTANGLE_HH_
 
 #include "onedimobject2.hh"
-#include "point5.hh"
+#include "point6.hh"
 
 #include <ostream>
 #include <istream>

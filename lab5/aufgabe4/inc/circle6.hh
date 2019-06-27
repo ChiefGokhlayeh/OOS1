@@ -1,8 +1,8 @@
 #ifndef CIRCLE_HH_
 #define CIRCLE_HH_
 
-#include "point4.hh"
-#include "onedimobject.hh"
+#include "point6.hh"
+#include "onedimobject2.hh"
 
 #include <string>
 #include <istream>
