@@ -139,6 +139,8 @@ MyList &MyList::operator=(const MyList &other)
             MyListElement *fp = new MyListElement(f.GetData(), f.GetNext());
             f.SetNext(nullptr);
 
+            if (first != nullptr)
+                delete first;
             first = fp;
             last = l == nullptr ? fp : l;
             size = s;
